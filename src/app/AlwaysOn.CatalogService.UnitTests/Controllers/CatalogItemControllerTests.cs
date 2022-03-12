@@ -32,7 +32,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             [Theory, AutoData]
             public async Task WhenLimitIsAccepted_ReturnsCatalogItems(IEnumerable<CatalogItem> items)
             {
-                _databaseService.ListCatalogItemsAsync(100).Returns(Task.FromResult(items));
+                _databaseService.ListCatalogItemsAsync(100).Returns(items);
                 
                 var controller = new CatalogItemController(_logger, _databaseService, null, null);
 
@@ -83,12 +83,24 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
                 result.Result.Should().BeOfType<OkObjectResult>();
                 result.Should().BeAssignableTo<ActionResult<CatalogItem>>();
             }
+            
+            [Theory, AutoData]
+            public async Task WhenItemDoesNotExist_ReturnsCatalogItem(Guid itemId)
+            {
+                _databaseService.GetCatalogItemByIdAsync(itemId).Returns(Task.FromResult<CatalogItem>(null!));
+
+                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+
+                var result = await controller.GetCatalogItemByIdAsync(itemId);
+                
+                result.Result.Should().BeOfType<NotFoundResult>();
+            }
         }
 
         public class DeleteCatalogItemAsync : CatalogItemControllerTests
         {
             [Theory, AutoData]
-            public async Task WhenNotExisting_ReturnsAccepted(Guid itemId)
+            public async Task WhenItemDoesNotExist_ReturnsAccepted(Guid itemId)
             {
                 _databaseService.GetCatalogItemByIdAsync(itemId).Returns(Task.FromResult<CatalogItem>(null!));
 
