@@ -6,7 +6,6 @@ using AlwaysOn.CatalogService.Controllers;
 using AlwaysOn.Shared.Exceptions;
 using AlwaysOn.Shared.Interfaces;
 using AlwaysOn.Shared.Models;
-using AlwaysOn.Shared.Models.DataTransfer;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +21,6 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
         private readonly IDatabaseService _databaseService = Substitute.For<IDatabaseService>();
         private readonly ILogger<CatalogItemController> _logger = Substitute.For<ILogger<CatalogItemController>>();
         
-        private static T? GetObjectResultContent<T>(ActionResult<T> result)
-        {
-            return (T) ((ObjectResult) result.Result!).Value!;
-        }
-        
         public class ListCatalogItemsAsync : CatalogItemControllerTests
         {
             [Theory, AutoData]
@@ -38,8 +32,10 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
 
                 var result = await controller.ListCatalogItemsAsync();
 
-                result.Result.Should().BeOfType<OkObjectResult>();
-                result.Should().BeAssignableTo<ActionResult<IEnumerable<CatalogItem>>>();
+                result.Result.Should()
+                    .BeOfType<OkObjectResult>()
+                    .Which
+                    .Value.Should().BeEquivalentTo(items);
             }
 
             [Fact]
@@ -51,8 +47,10 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
                 
                 var result = await controller.ListCatalogItemsAsync();
 
-                result.Result.Should().BeOfType<ObjectResult>();
-                ((ObjectResult) result.Result!).StatusCode.Should().Be((int) HttpStatusCode.InternalServerError);
+                result.Result.Should()
+                    .BeOfType<ObjectResult>()
+                    .Which
+                    .StatusCode.Should().Be((int) HttpStatusCode.InternalServerError);
             }
 
             [Fact]
@@ -64,8 +62,10 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
                 
                 var result = await controller.ListCatalogItemsAsync();
 
-                result.Result.Should().BeOfType<ObjectResult>();
-                ((ObjectResult) result.Result!).StatusCode.Should().Be((int) HttpStatusCode.ServiceUnavailable);
+                result.Result.Should()
+                    .BeOfType<ObjectResult>()
+                    .Which
+                    .StatusCode.Should().Be((int) HttpStatusCode.ServiceUnavailable);
             }
         }
 
@@ -80,8 +80,10 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
 
                 var result = await controller.GetCatalogItemByIdAsync(itemId);
                 
-                result.Result.Should().BeOfType<OkObjectResult>();
-                result.Should().BeAssignableTo<ActionResult<CatalogItem>>();
+                result.Result.Should()
+                    .BeOfType<OkObjectResult>()
+                    .Which
+                    .Value.Should().BeEquivalentTo(item);
             }
             
             [Theory, AutoData]
