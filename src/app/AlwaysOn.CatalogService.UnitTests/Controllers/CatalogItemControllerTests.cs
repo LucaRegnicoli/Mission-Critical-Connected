@@ -6,6 +6,7 @@ using AlwaysOn.CatalogService.Controllers;
 using AlwaysOn.Shared.Exceptions;
 using AlwaysOn.Shared.Interfaces;
 using AlwaysOn.Shared.Models;
+using AlwaysOn.Shared.Models.DataTransfer;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,18 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
         private readonly IDatabaseService _databaseService = Substitute.For<IDatabaseService>();
         private readonly ILogger<CatalogItemController> _logger = Substitute.For<ILogger<CatalogItemController>>();
         
+        private static T? GetObjectResultContent<T>(ActionResult<T> result)
+        {
+            return (T) ((ObjectResult) result.Result!).Value!;
+        }
+        
         public class ListCatalogItemsAsync : CatalogItemControllerTests
         {
-            [Fact]
-            public async Task ReturnsCatalogItems()
+            [Theory, AutoData]
+            public async Task WhenLimitIsAccepted_ReturnsCatalogItems(IEnumerable<CatalogItem> items)
             {
+                _databaseService.ListCatalogItemsAsync(100).Returns(Task.FromResult(items));
+                
                 var controller = new CatalogItemController(_logger, _databaseService, null, null);
 
                 var result = await controller.ListCatalogItemsAsync();
@@ -61,24 +69,24 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             }
         }
 
-        public class GetCatalogItemByIdAsync
+        public class GetCatalogItemByIdAsync : CatalogItemControllerTests
         {
-            
-        }
+            [Theory, AutoData]
+            public async Task WhenItemExists_ReturnsCatalogItem(Guid itemId, CatalogItem item)
+            {
+                _databaseService.GetCatalogItemByIdAsync(itemId).Returns(item);
 
-        public class CreateNewCatalogItemAsync
-        {
-            
-        }
+                var controller = new CatalogItemController(_logger, _databaseService, null, null);
 
-        public class UpdateCatalogItemAsync
-        {
-            
+                var result = await controller.GetCatalogItemByIdAsync(itemId);
+                
+                result.Result.Should().BeOfType<OkObjectResult>();
+                result.Should().BeAssignableTo<ActionResult<CatalogItem>>();
+            }
         }
 
         public class DeleteCatalogItemAsync : CatalogItemControllerTests
         {
-
             [Theory, AutoData]
             public async Task WhenNotExisting_ReturnsAccepted(Guid itemId)
             {
@@ -93,29 +101,3 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
         }
     }
 }
-
-//         
-//
-//         private List<CatalogItem> GetTestCatalogItems()
-//         {
-//             return new List<CatalogItem>()
-//             {
-//                 new CatalogItem()
-//                 {
-//                     LastUpdated = DateTime.UtcNow,
-//                     Id = Guid.NewGuid(),
-//                     Description= "First test item",
-//                     Name = "First Item",
-//                     Price = 11111.11m
-//                 },
-//                 new CatalogItem() {
-//                     LastUpdated = DateTime.UtcNow.AddDays(-1),
-//                     Id = Guid.NewGuid(),
-//                     Description= "Second test item",
-//                     Name = "Second Item",
-//                     Price = 99.99m
-//
-//                 }
-//             };
-//
-//         }
