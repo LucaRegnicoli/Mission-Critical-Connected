@@ -19,6 +19,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
     public class CatalogItemControllerTests
     {
         private readonly IDatabaseService _databaseService = Substitute.For<IDatabaseService>();
+        private readonly IMessageProducerService _messageProducerService = Substitute.For<IMessageProducerService>();
         private readonly ILogger<CatalogItemController> _logger = Substitute.For<ILogger<CatalogItemController>>();
         
         public class ListCatalogItemsAsync : CatalogItemControllerTests
@@ -28,7 +29,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.ListCatalogItemsAsync(100).Returns(items);
                 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
 
                 var result = await controller.ListCatalogItemsAsync();
 
@@ -43,7 +44,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.ListCatalogItemsAsync(100).Throws(new AlwaysOnDependencyException(HttpStatusCode.ServiceUnavailable));
                 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
                 
                 var result = await controller.ListCatalogItemsAsync();
 
@@ -58,7 +59,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.ListCatalogItemsAsync(100).Throws(new AlwaysOnDependencyException(HttpStatusCode.TooManyRequests));
 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
                 
                 var result = await controller.ListCatalogItemsAsync();
 
@@ -76,7 +77,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.GetCatalogItemByIdAsync(itemId).Returns(item);
 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
 
                 var result = await controller.GetCatalogItemByIdAsync(itemId);
                 
@@ -91,7 +92,7 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.GetCatalogItemByIdAsync(itemId).Returns(Task.FromResult<CatalogItem>(null!));
 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
 
                 var result = await controller.GetCatalogItemByIdAsync(itemId);
                 
@@ -106,11 +107,11 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
             {
                 _databaseService.GetCatalogItemByIdAsync(itemId).Returns(Task.FromResult<CatalogItem>(null!));
 
-                var controller = new CatalogItemController(_logger, _databaseService, null, null);
+                var controller = new CatalogItemController(_logger, _databaseService, _messageProducerService, null);
 
                 var result = await controller.DeleteCatalogItemAsync(itemId);
-                
-                result.Should().BeOfType<ObjectResult>();
+
+                result.Should().BeOfType<AcceptedResult>();
             }
         }
     }

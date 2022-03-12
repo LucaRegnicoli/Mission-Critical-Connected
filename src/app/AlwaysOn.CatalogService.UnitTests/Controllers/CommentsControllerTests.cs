@@ -40,6 +40,5 @@ namespace AlwaysOn.CatalogService.UnitTests.Controllers
                 result.Result.Should().BeOfType<AcceptedAtRouteResult>();
             }
         }
-        
     }
 }
