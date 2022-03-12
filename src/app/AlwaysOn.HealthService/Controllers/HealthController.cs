@@ -19,8 +19,8 @@ namespace AlwaysOn.HealthService.Controllers
 
         public HealthController(SysConfiguration sysConfig, HealthCheckService healthCheckService)
         {
-            _sysConfig = sysConfig;
-            _healthCheckService = healthCheckService;
+            _sysConfig = sysConfig ?? throw new ArgumentNullException(nameof(sysConfig));
+            _healthCheckService = healthCheckService ?? throw new ArgumentNullException(nameof(healthCheckService));
         }
 
         /// <summary>
