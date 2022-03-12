@@ -18,6 +18,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlwaysOn.BackgroundProcessor", "AlwaysOn.BackgroundProcessor\AlwaysOn.BackgroundProcessor.csproj", "{EE033DD3-A518-482C-8A80-1CC1DCF7AD00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{64D8C192-D84D-470A-8AEC-AA868FAF9B31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{77CD0945-1B43-4E58-B621-AC0ECD6614C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlwaysOn.CatalogService.UnitTests", "AlwaysOn.CatalogService.UnitTests\AlwaysOn.CatalogService.UnitTests.csproj", "{65D139C9-CAF2-4510-A88B-30515AF1A7C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,11 +50,23 @@ Global
 		{EE033DD3-A518-482C-8A80-1CC1DCF7AD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE033DD3-A518-482C-8A80-1CC1DCF7AD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE033DD3-A518-482C-8A80-1CC1DCF7AD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D139C9-CAF2-4510-A88B-30515AF1A7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D139C9-CAF2-4510-A88B-30515AF1A7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D139C9-CAF2-4510-A88B-30515AF1A7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D139C9-CAF2-4510-A88B-30515AF1A7C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FB323D2F-92E0-49B1-8D73-039ED330B413}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE033DD3-A518-482C-8A80-1CC1DCF7AD00} = {64D8C192-D84D-470A-8AEC-AA868FAF9B31}
+		{65DC89C8-14AA-4233-BA4F-17142D7AFBF3} = {64D8C192-D84D-470A-8AEC-AA868FAF9B31}
+		{03BF2C9F-9819-4D2F-84D0-CBA23B0030FB} = {64D8C192-D84D-470A-8AEC-AA868FAF9B31}
+		{89F515D9-05FE-4C6D-8198-089633AD027C} = {64D8C192-D84D-470A-8AEC-AA868FAF9B31}
+		{6F7B801C-5457-449D-AE94-184D2A1DB776} = {77CD0945-1B43-4E58-B621-AC0ECD6614C7}
+		{65D139C9-CAF2-4510-A88B-30515AF1A7C3} = {77CD0945-1B43-4E58-B621-AC0ECD6614C7}
 	EndGlobalSection
 EndGlobal
