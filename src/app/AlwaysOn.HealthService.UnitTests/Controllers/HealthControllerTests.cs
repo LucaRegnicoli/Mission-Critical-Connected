@@ -28,7 +28,7 @@ namespace AlwaysOn.HealthService.UnitTests.Controllers
             }
             
             [Theory, MemberData(nameof(NullServices))]
-            public void WhenDependentServicesAreNull_ThrowsArgumentNullException_(SysConfiguration sysConfig, HealthCheckService healthCheckService, string expectedErrorParameter)
+            public void WhenDependentServicesAreNull_ThrowsArgumentNullException(SysConfiguration sysConfig, HealthCheckService healthCheckService, string expectedErrorParameter)
             {
                 Action action = () => { new HealthController(sysConfig, healthCheckService); };
 
