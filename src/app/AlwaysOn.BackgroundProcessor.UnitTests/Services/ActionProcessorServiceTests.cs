@@ -21,7 +21,7 @@ namespace AlwaysOn.BackgroundProcessor.UnitTests.Services
         public class Process : ActionProcessorServiceTests
         {
             [Theory, ItemBodyAutoData]
-            public async Task WhenActionIsAddCatalog_CatalogItemIsPersisted(ItemBody body)
+            public async Task WhenAddCatalog_CatalogItemIsPersisted(ItemBody body)
             {
                 var service = new ActionProcessorService(_logger, _databaseService, null);
 
