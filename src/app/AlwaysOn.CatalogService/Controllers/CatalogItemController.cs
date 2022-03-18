@@ -89,6 +89,7 @@ namespace AlwaysOn.CatalogService.Controllers
             try
             {
                 var res = await _databaseService.GetCatalogItemByIdAsync(itemId);
+                if (res == null) return NotFound();
                 // Remove absolute location off the imageUrl (i.e. the URI of the blob storage where it is stored)
                 // Images will be served from a relative path, thus by Front Door
                 res.ImageUrl = CatalogServiceHelpers.GetRelativeImageUrl(res.ImageUrl);
