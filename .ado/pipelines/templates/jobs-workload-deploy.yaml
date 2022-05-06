@@ -13,6 +13,7 @@ jobs: # using jobs so they each run in parallel
 
     - task: AzureCLI@2
       displayName: 'Install workload healthservice on AKS clusters'
+      retryCountOnTaskFailure: 2
       inputs:
         azureSubscription: $(azureServiceConnection)
         scriptType: pscore
@@ -42,7 +43,7 @@ jobs: # using jobs so they each run in parallel
             # Apply workload worker helm chart
             echo  "*** Deploy healthservice to $aksClusterName (in $aksClusterResourceGroup) via helm chart"
             helm upgrade --install healthservice-workload src/app/charts/healthservice `
-                          --namespace $(workloadNamespace) `
+                          --namespace $(workloadNamespace) --create-namespace `
                           --set containerimage="$fullContainerImageName" `
                           --set azure.region="$region" `
                           ${{ parameters.additionalHelmArguments }}
@@ -74,6 +75,7 @@ jobs: # using jobs so they each run in parallel
 
     - task: AzureCLI@2
       displayName: 'Install workload CatalogService on AKS clusters'
+      retryCountOnTaskFailure: 2
       inputs:
         azureSubscription: $(azureServiceConnection)
         scriptType: pscore
@@ -118,7 +120,8 @@ jobs: # using jobs so they each run in parallel
             echo "*** Deploy workload CatalogService to $aksClusterName (in $aksClusterResourceGroup) via helm chart"
             echo "*** Using container image $fullContainerImageName"
 
-            helm upgrade --install workload-catalogservice src/app/charts/catalogservice --namespace "$(workloadNamespace)" `
+            helm upgrade --install workload-catalogservice src/app/charts/catalogservice `
+                         --namespace "$(workloadNamespace)" --create-namespace `
                          --set azure.frontdoorid="$frontDoorId" `
                          --set azure.region="$region" `
                          --set azure.baseurl="$frontDoorFqdn" `
@@ -160,6 +163,7 @@ jobs: # using jobs so they each run in parallel
 
     - task: AzureCLI@2
       displayName: 'Install workload BackgroundProcessor on AKS clusters'
+      retryCountOnTaskFailure: 2
       inputs:
         azureSubscription: $(azureServiceConnection)
         scriptType: pscore
@@ -192,7 +196,7 @@ jobs: # using jobs so they each run in parallel
             # Apply workload BackgroundProcessor helm chart
             echo  "*** Deploy workload BackgroundProcessor to $aksClusterName (in $aksClusterResourceGroup) via helm chart"
             helm upgrade --install workload-backgroundprocessor src/app/charts/backgroundprocessor `
-                         --namespace $(workloadNamespace) `
+                         --namespace $(workloadNamespace) --create-namespace `
                          --set containerimage="$fullContainerImageName" `
                          --set azure.region="$region" `
                          ${{ parameters.additionalHelmArguments }}
@@ -221,6 +225,7 @@ jobs: # using jobs so they each run in parallel
 
     - task: AzureCLI@2
       displayName: 'Upload UI app to Blob Storage'
+      retryCountOnTaskFailure: 2
       inputs:
         azureSubscription: $(azureServiceConnection)
         scriptType: pscore
@@ -237,7 +242,7 @@ jobs: # using jobs so they each run in parallel
             echo "*** Uploading UI app to storage account $($stamp.public_storage_account_name) in stamp $($stamp.location)"
 
             $keyVaultName = $stamp.key_vault_name
-            $appInsightsKey = $(az keyvault secret show --name APPINSIGHTS-INSTRUMENTATIONKEY --vault-name $keyVaultName --query "value" -o tsv)
+            $appInsightsConnString = $(az keyvault secret show --name APPLICATIONINSIGHTS-CONNECTION-STRING --vault-name $keyVaultName --query "value" -o tsv)
 
             # remove config.js file, which needs to be regenerated for each environment
             echo "*** Deleting the old config.js file"
@@ -246,7 +251,7 @@ jobs: # using jobs so they each run in parallel
             echo "*** Storing configuration to $configFilePath"
             # warning: make sure that these variable names are in sync with client code
             Add-Content -Path $configFilePath -Value "window.API_URL = `"/api`""
-            Add-Content -Path $configFilePath -Value "window.APPINSIGHTS_INSTRUMENTATIONKEY = `"$appInsightsKey`""
+            Add-Content -Path $configFilePath -Value "window.APPLICATIONINSIGHTS_CONNECTION_STRING = `"$appInsightsConnString`""
 
             $versionLabel = "$(riVariant)-$("$(Build.SourceBranch)" -Replace 'refs/heads/', '')-$(Build.BuildId)"
             echo "*** DEBUG: Setting VERSION_LABEL to $versionLabel"

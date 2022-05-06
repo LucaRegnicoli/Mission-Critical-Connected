@@ -45,6 +45,7 @@ stages:
 
           - task: AzureCLI@2
             displayName: 'Fetch current Front Door backends'
+            retryCountOnTaskFailure: 1
             inputs:
               azureSubscription: '$(azureServiceConnection)'
               scriptType: pscore
@@ -285,6 +286,7 @@ stages:
             - ${{ if ne(parameters.environment, 'e2e') }}: # Only in int/prod
               - task: AzureCLI@2
                 displayName: 'Fetch previous release prefix through disabled Front Door backends'
+                retryCountOnTaskFailure: 1
                 inputs:
                   azureSubscription: '$(azureServiceConnection)'
                   scriptType: pscore
@@ -363,6 +365,7 @@ stages:
             # This prevents side effects in the logging in which errors might show up which are only related to the destructions of the infra
             - task: AzureCLI@2
               displayName: 'Delete application deployments on AKS prior to destroy'
+              retryCountOnTaskFailure: 1
               inputs:
                 azureSubscription: $(azureServiceConnection)
                 scriptType: pscore
@@ -508,9 +511,7 @@ stages:
                   terraformStateFilename:             '$(terraformStateFileGlobal)'
                   terraformWorkingDirectory:          '$(workingDirectory)/globalresources'
                   customAttributes:           '-var=prefix="$(prefix)"
-                                              -var=suffix="$(globalSuffix)"
-                                              -var=branch="$(sourceBranch)"
-                                              -var=queued_by="$(Build.QueuedBy)"
-                                              -var=contact_email="$(contactEmail)"
-                                              -var=''stamps=$(stampLocations)''
-                                              $(terraformAdditionalParametersCustomDomains)'
+                                               -var=environment="${{ parameters.environment }}"
+                                               -var=suffix="$(globalSuffix)"
+                                               -var=''stamps=$(stampLocations)''
+                                               $(terraformAdditionalParametersCustomDomains)'
