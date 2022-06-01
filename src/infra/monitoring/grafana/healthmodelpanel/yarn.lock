@@ -1200,13 +1200,13 @@
     uplot "1.6.19"
     xss "1.0.11"
 
-"@grafana/data@^8.5.2":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-8.5.2.tgz#f10eefef0646a5e735fa44a81e0bf9df55a95423"
-  integrity sha512-fLwYed3mkTz9r+0357cMGLOWD6WZZ916/AERsTNfNjvcO8lY5FrX0sBlRJ7UCgXNE3bZUoGwMi5wIHnoDmCK4A==
+"@grafana/data@^8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-8.5.4.tgz#b97d5551d8d346f3113c4ed3482a830aa46787d4"
+  integrity sha512-8ByhBRgSA6Aher4rQtaM9XND6bAaSYKhtwLOeei7XTGGpd4y7ZcNKksI2fKE+pfUsQlbfJOy8yBtaAoEOKZAWQ==
   dependencies:
     "@braintree/sanitize-url" "6.0.0"
-    "@grafana/schema" "8.5.2"
+    "@grafana/schema" "8.5.4"
     "@types/d3-interpolate" "^1.4.0"
     d3-interpolate "1.4.0"
     date-fns "2.28.0"
@@ -1273,10 +1273,10 @@
   dependencies:
     tslib "2.3.1"
 
-"@grafana/schema@8.5.2":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-8.5.2.tgz#1fe04e8ae69a7c699e5dc137868d8d63e14fee5b"
-  integrity sha512-L3o5uHsakmRHQvIErvy84YkJkbv/lmmKQJisn6Mxfry/F7wa/cnRSBTvYwzlbRM/SKaj9iXqWcUb/Vjnlwh3/w==
+"@grafana/schema@8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-8.5.4.tgz#99f0554998f78e16e58d17d9d628f62e570a766e"
+  integrity sha512-1tzLpWdyctRBIzNrRiZo32MG2h3sMfwyYTZFrY/CURTWfmgFIXbJK4mscrxURlRwChSkGX9+uXQwJZpG7s6K0Q==
   dependencies:
     tslib "2.3.1"
 
