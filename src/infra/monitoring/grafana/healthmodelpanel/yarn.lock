@@ -1175,38 +1175,13 @@
     uplot "1.6.19"
     xss "1.0.10"
 
-"@grafana/data@8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-8.5.1.tgz#2f03991b0457f34f05f3f85763becf654fde7860"
-  integrity sha512-NQGNAG4AcajYUpNsiR6bREITLWzbPKL0jZ/ClOD8eUQqn45Xt5hNewd7dK+w5dEjm6951cGWhSCg/2XBh3ZLgg==
+"@grafana/data@8.5.4", "@grafana/data@^8.5.2":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-8.5.4.tgz#b97d5551d8d346f3113c4ed3482a830aa46787d4"
+  integrity sha512-8ByhBRgSA6Aher4rQtaM9XND6bAaSYKhtwLOeei7XTGGpd4y7ZcNKksI2fKE+pfUsQlbfJOy8yBtaAoEOKZAWQ==
   dependencies:
     "@braintree/sanitize-url" "6.0.0"
-    "@grafana/schema" "8.5.1"
-    "@types/d3-interpolate" "^1.4.0"
-    d3-interpolate "1.4.0"
-    date-fns "2.28.0"
-    eventemitter3 "4.0.7"
-    lodash "4.17.21"
-    marked "4.0.12"
-    moment "2.29.2"
-    moment-timezone "0.5.34"
-    ol "6.14.1"
-    papaparse "5.3.2"
-    react "17.0.2"
-    react-dom "17.0.2"
-    regenerator-runtime "0.13.9"
-    rxjs "7.5.5"
-    tslib "2.3.1"
-    uplot "1.6.19"
-    xss "1.0.11"
-
-"@grafana/data@^8.5.2":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-8.5.2.tgz#f10eefef0646a5e735fa44a81e0bf9df55a95423"
-  integrity sha512-fLwYed3mkTz9r+0357cMGLOWD6WZZ916/AERsTNfNjvcO8lY5FrX0sBlRJ7UCgXNE3bZUoGwMi5wIHnoDmCK4A==
-  dependencies:
-    "@braintree/sanitize-url" "6.0.0"
-    "@grafana/schema" "8.5.2"
+    "@grafana/schema" "8.5.4"
     "@types/d3-interpolate" "^1.4.0"
     d3-interpolate "1.4.0"
     date-fns "2.28.0"
@@ -1234,10 +1209,10 @@
     tslib "2.3.1"
     typescript "4.4.4"
 
-"@grafana/e2e-selectors@8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-8.5.1.tgz#4be33edb9bf01d283f8ab649b4997c4ecaf10bf6"
-  integrity sha512-WpdnGZU81UOALHCvKE7jjvSgfct3oXVxg9ishz9WKkSthNq5vQPX8AFpxl27nVACKPO5adpBN7qCUeuABS477Q==
+"@grafana/e2e-selectors@8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-8.5.4.tgz#6017d2117f1f30a0a865f3033647a61bca06c5be"
+  integrity sha512-hKfr1hiHC++wJY2QI/XQzdi5ZLWyixSQ2wlSQwV+2lzAq1DQT4uE00argIj8Gh/TLPcp9h+Qg5J+SuRhzsg8tg==
   dependencies:
     "@grafana/tsconfig" "^1.2.0-rc1"
     tslib "2.3.1"
@@ -1266,17 +1241,10 @@
   dependencies:
     tslib "2.3.1"
 
-"@grafana/schema@8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-8.5.1.tgz#fffdd58dbcda3925d71aaaa8c8490d081ae12511"
-  integrity sha512-dmQKjuln0PcevX09LYV78XkPr/KI7RSI1BsPrkxJ6vqfkIC/Ty5443LryFZ+PxA8Mle3tQWA/2Qz9FzJeZHG/A==
-  dependencies:
-    tslib "2.3.1"
-
-"@grafana/schema@8.5.2":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-8.5.2.tgz#1fe04e8ae69a7c699e5dc137868d8d63e14fee5b"
-  integrity sha512-L3o5uHsakmRHQvIErvy84YkJkbv/lmmKQJisn6Mxfry/F7wa/cnRSBTvYwzlbRM/SKaj9iXqWcUb/Vjnlwh3/w==
+"@grafana/schema@8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-8.5.4.tgz#99f0554998f78e16e58d17d9d628f62e570a766e"
+  integrity sha512-1tzLpWdyctRBIzNrRiZo32MG2h3sMfwyYTZFrY/CURTWfmgFIXbJK4mscrxURlRwChSkGX9+uXQwJZpG7s6K0Q==
   dependencies:
     tslib "2.3.1"
 
@@ -1462,17 +1430,17 @@
     uplot "1.6.19"
     uuid "8.3.2"
 
-"@grafana/ui@^8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-8.5.1.tgz#4f8833effcc524318428cb9b328a6a8818ad41a7"
-  integrity sha512-B3fiJAMll3ixMxeQllV8KEk1VZD3SLruQzTcudBa9uLViDr9pma2Q8PTa9nsN1A9+4g5v9J/NRlPLyPIadk7xQ==
+"@grafana/ui@^8.5.4":
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-8.5.4.tgz#9ce099b4a984492acce4d4860443ea0ee7ac7769"
+  integrity sha512-/zUm5lCOMPcn1gGSYtOphHShaWdi+VIIbPTFoYY3AaB+jOpOtgFx2L9zuarn5mNyUikB1cW4qrjAfc0heL4M0Q==
   dependencies:
     "@emotion/css" "11.7.1"
     "@emotion/react" "11.8.2"
     "@grafana/aws-sdk" "0.0.35"
-    "@grafana/data" "8.5.1"
-    "@grafana/e2e-selectors" "8.5.1"
-    "@grafana/schema" "8.5.1"
+    "@grafana/data" "8.5.4"
+    "@grafana/e2e-selectors" "8.5.4"
+    "@grafana/schema" "8.5.4"
     "@grafana/slate-react" "0.22.10-grafana"
     "@monaco-editor/react" "4.3.1"
     "@popperjs/core" "2.11.4"
