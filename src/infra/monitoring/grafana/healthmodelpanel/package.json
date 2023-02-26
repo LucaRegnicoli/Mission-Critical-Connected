@@ -13,15 +13,15 @@
   "author": "nielsb@microsoft.com",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@grafana/data": "^8.5.2",
-    "@grafana/toolkit": "^8.4.4",
-    "@grafana/ui": "^8.5.1"
+    "@grafana/data": "^9.1.8",
+    "@grafana/toolkit": "^9.3.6",
+    "@grafana/ui": "^9.1.8"
   },
   "engines": {
     "node": ">=14"
   },
   "dependencies": {
-    "@emotion/css": "^11.9.0",
+    "@emotion/css": "^11.10.6",
     "@types/react-cytoscapejs": "^1.2.2",
     "react-cytoscapejs": "^1.2.1"
   },
