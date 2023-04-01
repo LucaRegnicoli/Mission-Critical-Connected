@@ -1,4 +1,4 @@
-FROM node:19.5.0 as build-env
+FROM node:19.8.1 as build-env
 WORKDIR /app
 
 COPY . ./
